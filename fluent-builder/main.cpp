@@ -31,17 +31,17 @@ struct HtmlBuilder {
   explicit HtmlBuilder(std::string root_name) {
 	root.name = std::move(root_name);
   }
-  void add_child(std::string child_name, std::string child_text) {
+  HtmlBuilder& add_child(std::string child_name, std::string child_text) {
 	HtmlElement e{std::move(child_name), std::move(child_text)};
 	root.elements.emplace_back(e);
+	return *this;
   }
   std::string str() const { return root.str(); }
 };
 
 int main() {
   HtmlBuilder builder{"ul"};
-  builder.add_child("li", "hello");
-  builder.add_child("li", "world");
+  builder.add_child("li", "hello").add_child("li", "world");
   std::cout << builder.str();
   return 0;
 }
