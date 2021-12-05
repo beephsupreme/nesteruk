@@ -23,6 +23,10 @@ struct HtmlElement {
 	}
 	oss << i << "</" << name << ">" << std::endl;
 	return oss.str();
+
+	static HtmlBuilder build(std::string root_name) {
+	  return {root_name};
+	}
   }
 };
 
